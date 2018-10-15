@@ -3,7 +3,7 @@ require_relative "view"
 class Controller
   def initialize(cookbook)
     @cookbook = cookbook
-    # View = View.new
+    @view = View.new
   end
 
   def list
@@ -12,9 +12,9 @@ class Controller
 
   def create
     # Ask user for recipe name -> name
-    name = View.ask_for("name")
+    name = @view.ask_for("name")
     # Ask user for recipe descriptio -> descriptio
-    description = View.ask_for("description")
+    description = @view.ask_for("description")
     # create an instance of Recipe with name/description
     recipe = Recipe.new(name, description)
     # send the new instance to the cookbook
@@ -25,7 +25,7 @@ class Controller
     # list the recipes
     display_recipes
     # ask user for index(number)
-    index = (View.ask_for("number").to_i - 1)
+    index = (@view.ask_for("number").to_i - 1)
     # tell cookbook to remove the recipe
     @cookbook.remove(index)
   end
@@ -36,6 +36,6 @@ class Controller
     # get recipes from cookbook
     recipes = @cookbook.all
     # displaying recipes to user with index
-    View.display(recipes)
+    @view.display(recipes)
   end
 end
